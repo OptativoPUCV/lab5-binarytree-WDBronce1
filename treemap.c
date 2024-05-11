@@ -112,14 +112,17 @@ void removeNode(TreeMap * tree, TreeNode* node)
         if(node->parent == NULL)
         {
             tree->root = NULL;
+            eraseTreeMap(tree, node->pair->key);
         }
         if(node->parent->left == node)
         {
             node->parent->left = NULL;
+            eraseTreeMap(tree, node->pair->key);
         }
         if(node->parent->right == node)
         {
             node->parent->right = NULL;
+            eraseTreeMap(tree, node->pair->key);
         }
         return;
     }
@@ -129,16 +132,19 @@ void removeNode(TreeMap * tree, TreeNode* node)
         {
             tree->root = node->right;
             node->right->parent = NULL;
+            eraseTreeMap(tree, node->pair->key);
         }
         if(node->parent->left == node)
         {
             node->parent->left = node->right;
             node->right->parent = node->parent;
+            eraseTreeMap(tree, node->pair->key);
         }
         if(node->parent->right == node)
         {
             node->parent->right = node->right;
             node->right->parent = node->parent;
+            eraseTreeMap(tree, node->pair->key);
         }
         return;
     }
@@ -148,16 +154,19 @@ void removeNode(TreeMap * tree, TreeNode* node)
         {
             tree->root = node->left;
             node->left->parent = NULL;
+            eraseTreeMap(tree, node->pair->key);
         }
         if(node->parent->left == node)
         {
             node->parent->left = node->left;
             node->left->parent = node->parent;
+            eraseTreeMap(tree, node->pair->key);
         }
         if(node->parent->right == node)
         {
             node->parent->right = node->left;
             node->left->parent = node->parent;
+            eraseTreeMap(tree, node->pair->key);
         }
         return;
     }
@@ -167,18 +176,21 @@ void removeNode(TreeMap * tree, TreeNode* node)
         {
             tree->root = node->left;
             node->left->parent = NULL;
+            eraseTreeMap(tree, node->pair->key);
         }
         if(node->parent->left == node)
         {
             node->parent->left = node->left;
             node->left->parent = node->parent;
             node->right->parent = node->left;
+            eraseTreeMap(tree, node->pair->key);
         }
         if(node->parent->right == node)
         {
             node->parent->right = node->right;
             node->right->parent = node->parent;
             node->left->parent = node -> right;
+            eraseTreeMap(tree, node->pair->key);
         }
         return;
     }
