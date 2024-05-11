@@ -290,7 +290,7 @@ Pair * firstTreeMap(TreeMap * tree)
     tree->current = aux;
     return aux->pair;
 }
-
+/*
 Pair * nextTreeMap(TreeMap * tree) 
 {
     TreeNode * aux = tree->current;
@@ -310,4 +310,39 @@ Pair * nextTreeMap(TreeMap * tree)
     }
     tree->current = aux;
     return aux->parent->pair;
+}*/
+Pair * nextTreeMap(TreeMap * tree) 
+{
+    if (tree == NULL || tree->root == NULL) return NULL;
+    if (tree->current == NULL) return NULL;
+    TreeNode * aux = tree->current;
+    if (aux->right != NULL)
+    {
+        aux = aux->right;
+        while (aux->left != NULL)
+            {
+                aux = aux->left;
+
+            }
+        tree->current = aux;
+        return aux->pair;
+    }
+    else
+    {
+        TreeNode * parent = aux->parent;
+        while (parent != NULL && aux == parent->right)
+            {
+                aux = parent;
+                parent = parent->parent;
+            }
+        tree->current = parent;
+        if (parent != NULL)
+        {
+            return parent->pair;
+        }
+        else
+        {
+            return NULL;
+        }
+    }
 }
