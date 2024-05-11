@@ -313,19 +313,15 @@ Pair * nextTreeMap(TreeMap * tree)
 }*/
 Pair * nextTreeMap(TreeMap * tree) 
 {
-    if (tree == NULL || tree->root == NULL) 
+    if(tree == NULL || tree->root == NULL || tree->current == NULL) 
     {
         return NULL;
     }
-    if (tree->current == NULL) 
-    {
-        return NULL;
-    }
-    TreeNode * Aux = tree->current;
-    if (Aux->right != NULL)
+    TreeNode *Aux = tree->current;
+    if(Aux->right != NULL)
     {
         Aux = Aux->right;
-        while (Aux->left != NULL)
+        while(Aux->left != NULL)
             {
                 Aux = Aux->left;
 
@@ -333,16 +329,16 @@ Pair * nextTreeMap(TreeMap * tree)
         tree->current = Aux;
         return Aux->pair;
     }
-    if(Aux->right != NULL)
+    else
     {
         TreeNode *padre = Aux->parent;
-        while (padre != NULL && Aux == padre->right)
+        while(padre != NULL && Aux == padre->right)
         {
             Aux = padre;
             padre = padre->parent;
         }
         tree->current = padre;
-        if (padre != NULL)
+        if(padre != NULL)
         {
             return padre->pair;
         }
