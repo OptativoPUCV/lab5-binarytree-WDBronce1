@@ -123,10 +123,13 @@ void removeNode(TreeMap * tree, TreeNode* node)
         }
         return;
     }
-    /*
     if(node->left == NULL && node->right != NULL)
     {
-
+        if(node->parent == NULL)
+        {
+            tree->root = node->right;
+            node->right->parent = NULL;
+        }
         if(node->parent->left == node)
         {
             node->parent->left = node->right;
@@ -141,25 +144,46 @@ void removeNode(TreeMap * tree, TreeNode* node)
     }
     if(node->left != NULL && node->right == NULL)
     {
-
+        if(node->parent == NULL)
+        {
+            tree->root = node->left;
+            node->left->parent = NULL;
+        }
         if(node->parent->left == node)
         {
-            node->parent->left = node->right;
+            node->parent->left = node->left;
             node->left->parent = node->parent;
         }
         if(node->parent->right == node)
         {
-            node->parent->right = node->right;
+            node->parent->right = node->left;
             node->left->parent = node->parent;
         }
         return;
     }
     if(node->left != NULL && node->right != NULL)
     {
+        if(node->parent == NULL)
+        {
+            tree->root = node->left;
+            node->left->parent = NULL;
+        }
+        if(node->parent->left == node)
+        {
+            node->parent->left = node->left;
+            node->left->parent = node->parent;
+            node->right->parent = node->left;
+        }
+        if(node->parent->right == node)
+        {
+            node->parent->right = node->right;
+            node->right->parent = node->parent;
+            node->left->parent = node -> right;
+        }
         return;
     }
 
-}*/
+}
 
 void eraseTreeMap(TreeMap * tree, void* key)
 {
